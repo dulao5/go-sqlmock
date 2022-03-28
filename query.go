@@ -45,7 +45,7 @@ func (f QueryMatcherFunc) Match(expectedSQL, actualSQL string) error {
 var QueryMatcherRegexp QueryMatcher = QueryMatcherFunc(func(expectedSQL, actualSQL string) error {
 	expect := stripQuery(expectedSQL)
 	actual := stripQuery(actualSQL)
-	re, err := regexp.Compile(expect)
+	re, err := regexp.Compile(regexp.QuoteMeta(expect))
 	if err != nil {
 		return err
 	}
